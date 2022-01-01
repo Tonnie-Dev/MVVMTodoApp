@@ -19,6 +19,6 @@ class TodoRepositoryImpl(private val dao: TodoDAO): TodoRepository {
 
     override suspend fun getTodoById(id: Int): Todo? {
 
-        dao.getTodoById(id = id)
+        return dao.getTodoById(id = id)
     }
 }
