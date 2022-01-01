@@ -14,7 +14,11 @@ interface TodoDAO {
     @Query("SELECT * FROM Todo")
     suspend fun getTodos(): List<Todo>
 
-    @Query("DELETE FROM todo WHERE id=:id")
+    @Query("DELETE FROM Todo WHERE id=:id")
     suspend fun deleteTodo(id: Int)
+
+    @Query("SELECT * FROM Todo WHERE id = :id")
+    suspend fun getTodoById(id: Int):Todo
+
 
 }
