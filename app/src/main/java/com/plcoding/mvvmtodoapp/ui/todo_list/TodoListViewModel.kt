@@ -38,12 +38,15 @@ class TodoListViewModel @Inject constructor(private val repository: TodoReposito
                     repository.deleteTodo(event.todo)
 
                     //send UI event to show snackbar
-
-                    sendUIEvent(UIEvent.ShowSnackbar(message = "Todo Deleted", action = "Undo"))
-
-
+                    sendUIEvent(
+                        UIEvent.ShowSnackbar(
+                            message = "Todo Deleted",
+                            action = "Undo"
+                        )
+                    )
                 }
             }
+
             is OnDoneChange -> {
 
                 viewModelScope.launch {

@@ -1,6 +1,8 @@
 package com.plcoding.mvvmtodoapp.ui.todo_list
 
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,12 +30,22 @@ fun TodoListScreen(
 
                 is UIEvent.ShowSnackbar -> {
 
-                    scaffoldState.snackbarHostState.showSnackbar(
+                    //establish if an action was performed using result
+
+                    val result = scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message,
                         actionLabel = event.action
                     )
 
+
+                    if (result === SnackbarResult.ActionPerformed) {
+
+                    //send undo delete event to viewModel when snackbar is clicked
+                        viewModel.onEvent(TodoListEvent.OnUndoneDeleteClick)
+                    }
+
                 }
+
                 is UIEvent.Navigate -> {
 
                     onNavigate(event)
@@ -45,6 +57,21 @@ fun TodoListScreen(
 
 
         }
+    }
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        floatingActionButton = {
+
+
+            FloatingActionButton(onClick = { viewModel.onEvent(TodoListEvent.OnAddTodoClick)}) {
+
+                Icon(imageVector = Icons.Default.Add, contentDescription = "")
+            }
+        }
+    ) {
+
+
     }
 
 }
