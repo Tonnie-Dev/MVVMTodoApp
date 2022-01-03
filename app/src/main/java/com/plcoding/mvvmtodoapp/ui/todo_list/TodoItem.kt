@@ -53,6 +53,6 @@ fun TodoItem(
 
         Checkbox(checked = todo.isDone, onCheckedChange = {
                 isChecked ->
-            onEvent(TodoListEvent.OnDoneChange(isDone = isChecked))})
+            onEvent(TodoListEvent.OnDoneChange(isDone = isChecked, todo = todo))})
     }
 }
