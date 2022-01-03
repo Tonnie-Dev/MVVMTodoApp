@@ -7,7 +7,7 @@ interface TodoRepository {
 
     suspend fun insertTodo(todo: Todo)
 
-
+//returns flow thefore no need for suspend
     fun getTodos(): Flow<List<Todo>>
 
 

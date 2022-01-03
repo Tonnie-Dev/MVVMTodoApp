@@ -9,7 +9,7 @@ class TodoRepositoryImpl(private val dao: TodoDAO): TodoRepository {
         dao.insertTodo(todo = todo)
     }
 
-    override suspend fun getTodos(): Flow<List<Todo>> {
+    override  fun getTodos(): Flow<List<Todo>> {
         return dao.getTodos()
     }
 
