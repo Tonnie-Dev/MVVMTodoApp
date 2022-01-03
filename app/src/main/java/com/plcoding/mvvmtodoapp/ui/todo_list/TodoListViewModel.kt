@@ -2,7 +2,6 @@ package com.plcoding.mvvmtodoapp.ui.todo_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.plcoding.mvvmtodoapp.data.Todo
 import com.plcoding.mvvmtodoapp.data.TodoRepository
 import com.plcoding.mvvmtodoapp.ui.todo_list.TodoListEvent.*
@@ -19,7 +18,7 @@ class TodoListViewModel @Inject constructor(private val repository: TodoReposito
     ViewModel() {
 
 
-    // val todos = repository.getTodos()
+    val todos = repository.getTodos()
     private val _uiEvent = Channel<UIEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
