@@ -1,6 +1,7 @@
 package com.plcoding.mvvmtodoapp.ui.todo_list
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -33,7 +34,7 @@ fun TodoItem(
 
 
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = todo.title, fontSize = 20.sp, fontWeight = FontWeight.Bold),
+                Text(text = todo.title, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.width(8.dp))
                 IconButton(onClick = { onEvent(TodoListEvent.DeleteTodo(todo = todo))}) {
 
@@ -41,6 +42,17 @@ fun TodoItem(
 
                 }
             }
+            
+            todo.description?.let { 
+                
+                Spacer(modifier = Modifier.width(8.dp))
+                
+                Text(text = it)
+            }
         }
+
+        Checkbox(checked = todo.isDone, onCheckedChange = {
+                isChecked ->
+            onEvent(TodoListEvent.OnDoneChange(isDone = isChecked))})
     }
 }
