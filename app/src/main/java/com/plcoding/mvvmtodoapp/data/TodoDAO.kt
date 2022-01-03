@@ -9,16 +9,16 @@ interface TodoDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTodo(todo: Todo)
 
-    //get realtime update in case database changes
+    //get realtime update in case database changes, this is a flow no need for suspend
     @Query("SELECT * FROM Todo")
-    suspend fun getTodos(): Flow<List<Todo>>
+    fun getTodos(): Flow<List<Todo>>
 
     @Delete
     suspend fun deleteTodo(todo: Todo)
 
     //return nullable Todos if the id doesn't exist instead of crashing the app
     @Query("SELECT * FROM Todo WHERE id = :id")
-    suspend fun getTodoById(id: Int):Todo?
+    suspend fun getTodoById(id: Int): Todo?
 
 
 }
