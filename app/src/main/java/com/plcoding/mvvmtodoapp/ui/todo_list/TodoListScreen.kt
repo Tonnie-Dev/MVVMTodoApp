@@ -1,10 +1,17 @@
 package com.plcoding.mvvmtodoapp.ui.todo_list
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.plcoding.mvvmtodoapp.util.UIEvent
 import kotlinx.coroutines.flow.collect
@@ -16,8 +23,8 @@ fun TodoListScreen(
 ) {
 
     /*viewModel.todos returns a flow but we need this as compose state
-    * we use flow.collectAsState()*/
-    val todos = viewModel.todos
+    * we use flow.collectAsState(), we pass an empty list for initial value*/
+    val todos by viewModel.todos.collectAsState(initial = emptyList())
 
     val scaffoldState = rememberScaffoldState()
 
@@ -71,6 +78,15 @@ fun TodoListScreen(
         }
     ) {
 
+
+        LazyColumn(modifier = Modifier.fillMaxWidth()){
+
+            items(todos){
+                todo ->
+
+                TodoItem(todo = todo, onEvent =viewModel::onEvent )
+            }
+        }
 
     }
 
