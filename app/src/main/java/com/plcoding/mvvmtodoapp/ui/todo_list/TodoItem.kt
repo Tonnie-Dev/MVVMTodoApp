@@ -6,7 +6,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,8 +22,6 @@ fun TodoItem(
     modifier: Modifier = Modifier
 ) {
 
-
-
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
 
         Column(
@@ -36,23 +33,29 @@ fun TodoItem(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = todo.title, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.width(8.dp))
-                IconButton(onClick = { onEvent(TodoListEvent.DeleteTodo(todo = todo))}) {
+                IconButton(onClick = { onEvent(TodoListEvent.DeleteTodo(todo = todo)) }) {
 
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete" )
+                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
 
                 }
             }
-            
-            todo.description?.let { 
-                
+
+            todo.description?.let {
+
                 Spacer(modifier = Modifier.width(8.dp))
-                
+
                 Text(text = it)
             }
         }
 
-        Checkbox(checked = todo.isDone, onCheckedChange = {
-                isChecked ->
-            onEvent(TodoListEvent.OnDoneChange(isDone = isChecked, todo = todo))})
+        Checkbox(checked = todo.isDone, onCheckedChange = { isChecked ->
+
+            onEvent(
+                TodoListEvent.OnDoneChange(
+                    isDone = isChecked,
+                    todo = todo
+                )
+            )
+        })
     }
 }

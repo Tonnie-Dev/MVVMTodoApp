@@ -1,8 +1,8 @@
 package com.plcoding.mvvmtodoapp.ui.todo_list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -47,7 +47,7 @@ fun TodoListScreen(
 
                     if (result === SnackbarResult.ActionPerformed) {
 
-                    //send undo delete event to viewModel when snackbar is clicked
+                        //send undo delete event to viewModel when snackbar is clicked
                         viewModel.onEvent(TodoListEvent.OnUndoneDeleteClick)
                     }
 
@@ -71,7 +71,7 @@ fun TodoListScreen(
         floatingActionButton = {
 
 
-            FloatingActionButton(onClick = { viewModel.onEvent(TodoListEvent.OnAddTodoClick)}) {
+            FloatingActionButton(onClick = { viewModel.onEvent(TodoListEvent.OnAddTodoClick) }) {
 
                 Icon(imageVector = Icons.Default.Add, contentDescription = "")
             }
@@ -79,12 +79,16 @@ fun TodoListScreen(
     ) {
 
 
-        LazyColumn(modifier = Modifier.fillMaxWidth()){
+        LazyColumn(modifier = Modifier.fillMaxWidth()) {
 
-            items(todos){
-                todo ->
+            items(todos) { todo ->
 
-                TodoItem(todo = todo, onEvent =viewModel::onEvent )
+                TodoItem(
+                    todo = todo,
+                    onEvent = viewModel::onEvent,
+                    modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { viewModel.onEvent(TodoListEvent.OnTodoClick(todo = todo))})
             }
         }
 
