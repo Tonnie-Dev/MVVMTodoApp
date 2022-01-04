@@ -9,5 +9,5 @@ sealed class UIEvent {
     data class ShowSnackbar(
         val message: String,
         val action: String? = null
-    ):UIEvent()
+    ) : UIEvent()
 }

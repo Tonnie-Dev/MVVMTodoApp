@@ -94,13 +94,19 @@ class AddEditTodoViewModel @Inject constructor(
                         return@launch
                     }
 
-                    repository.insertTodo(Todo(
-                        title = title,
-                        description = description,
-                        //if null set it to false
-                        isDone = todo?.isDone ?: false
-                    ))
+                    repository.insertTodo(
+                        Todo(
+                            title = title,
+                            description = description,
+                            //if null set it to false
+                            isDone = todo?.isDone ?: false
+                            //Room generates new id
+                            , id = todo?.id
+                        )
+                    )
 
+                    //return to the previous screen
+sendUIEvent(UIEvent.PopBackStack)
                 }
             }
         }
