@@ -41,22 +41,29 @@ class AddEditTodoViewModel @Inject constructor(
         //if we open a new todoObject then we need to load it from db
 
         //retrieve id from savedStateHandle
-      savedStateHandle.get<Int>("todoId")?.let {
+        savedStateHandle.get<Int>("todoId")
+                ?.let {
 
-            id ->
+                        id ->
 
-          //check if the id is equal to -1 (default id)
-          if (id!=-1  ){
+                    //check if the id is equal to -1 (default id) or check if is existing
+                    if (id != -1) {
 
-              //retrieve the do from db
+                        //retrieve the todoItem from db
 
-              viewModelScope.launch {
+                        viewModelScope.launch {
 
-                  todo = repository.getTodoById(id)
-              }
-          }
+                         repository.getTodoById(id)?.let {
+                             todo = it
+                             title = it.title
+                             description = it.description ?: ""
 
-        }
+                         }
+
+                        }
+                    }
+
+                }
 
 
     }
