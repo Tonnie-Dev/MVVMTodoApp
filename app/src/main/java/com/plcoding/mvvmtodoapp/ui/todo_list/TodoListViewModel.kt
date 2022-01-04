@@ -54,9 +54,9 @@ class TodoListViewModel @Inject constructor(private val repository: TodoReposito
                     repository.insertTodo(event.todo.copy(isDone = event.isDone))
                 }
             }
+
             is OnUndoneDeleteClick -> {
                 deletedTodo?.let {
-
                         todo ->
                     viewModelScope.launch {
 

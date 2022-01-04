@@ -40,7 +40,6 @@ fun TodoListScreen(
                 is UIEvent.ShowSnackbar -> {
 
                     //establish if an action was performed using result
-
                     val result = scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message,
                         actionLabel = event.action
