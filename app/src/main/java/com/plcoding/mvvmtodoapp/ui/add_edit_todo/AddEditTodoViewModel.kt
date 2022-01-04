@@ -53,12 +53,13 @@ class AddEditTodoViewModel @Inject constructor(
 
                         viewModelScope.launch {
 
-                         repository.getTodoById(id)?.let {
-                             todo = it
-                             title = it.title
-                             description = it.description ?: ""
+                            repository.getTodoById(id)
+                                    ?.let {
+                                        todo = it
+                                        title = it.title
+                                        description = it.description ?: ""
 
-                         }
+                                    }
 
                         }
                     }
@@ -69,11 +70,10 @@ class AddEditTodoViewModel @Inject constructor(
     }
 
 
-
-    fun onEvent(event: AddEditTodoEvent){
+    fun onEvent(event: AddEditTodoEvent) {
 
         when (event) {
-            is AddEditTodoEvent.OnTitleChange ->{
+            is AddEditTodoEvent.OnTitleChange -> {
 
                 title = event.title
             }
@@ -85,7 +85,22 @@ class AddEditTodoViewModel @Inject constructor(
 
                 viewModelScope.launch {
 
-                    repository.insertTodo()
+                    //validate title
+
+                    if (title.isBlank()) {
+
+                        sendUIEvent(UIEvent.ShowSnackbar(message = "The title cannot be empty"))
+                        //return control to launch start
+                        return@launch
+                    }
+
+                    repository.insertTodo(Todo(
+                        title = title,
+                        description = description,
+                        //if null set it to false
+                        isDone = todo?.isDone ?: false
+                    ))
+
                 }
             }
         }
