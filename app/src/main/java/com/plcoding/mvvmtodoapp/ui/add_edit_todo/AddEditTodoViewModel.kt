@@ -67,4 +67,38 @@ class AddEditTodoViewModel @Inject constructor(
 
 
     }
+
+
+
+    fun onEvent(event: AddEditTodoEvent){
+
+        when (event) {
+            is AddEditTodoEvent.OnTitleChange ->{
+
+                title = event.title
+            }
+            is AddEditTodoEvent.OnDescriptionChange -> {
+
+                description = event.description
+            }
+            is AddEditTodoEvent.OnSaveTodoClick -> {
+
+                viewModelScope.launch {
+
+                    repository.insertTodo()
+                }
+            }
+        }
+
+
+    }
+
+
+    private fun sendUIEvent(event: UIEvent) {
+
+        viewModelScope.launch {
+            //send() needs to be done in Coroutine context
+            _uiEvent.send(event)
+        }
+    }
 }
