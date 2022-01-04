@@ -82,15 +82,21 @@ fun AddEditTodoScreen(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
-        TextField(value = viewModel.description, onValueChange = {
 
-            viewModel.onEvent(AddEditTodoEvent.OnDescriptionChange(it))
-        },
+        TextField(
+            value = viewModel.description,
+            onValueChange = {
+
+                viewModel.onEvent(AddEditTodoEvent.OnDescriptionChange(it))
+            },
 
             label = {
                 Text(text = "Description")
             },
-            modifier = Modifier.fillMaxWidth())
+            singleLine = false,
+            maxLines = 5,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 
 

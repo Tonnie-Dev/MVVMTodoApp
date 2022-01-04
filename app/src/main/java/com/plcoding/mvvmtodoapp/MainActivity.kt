@@ -3,6 +3,7 @@ package com.plcoding.mvvmtodoapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.navigation.compose.rememberNavController
 import com.plcoding.mvvmtodoapp.ui.theme.MVVMTodoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -12,6 +13,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MVVMTodoAppTheme {
+                
+                val navController = rememberNavController()
 
             }
         }
