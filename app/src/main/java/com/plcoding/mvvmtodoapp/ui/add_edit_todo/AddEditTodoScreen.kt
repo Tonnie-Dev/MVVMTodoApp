@@ -1,14 +1,16 @@
 package com.plcoding.mvvmtodoapp.ui.add_edit_todo
 
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.plcoding.mvvmtodoapp.util.UIEvent
 import kotlinx.coroutines.flow.collect
@@ -48,8 +50,6 @@ fun AddEditTodoScreen(
 
                 }
                 else -> Unit
-
-
             }
         }
 
@@ -60,15 +60,29 @@ fun AddEditTodoScreen(
 
         FloatingActionButton(onClick = {
             //fire event from viewModel
-
             viewModel.onEvent(AddEditTodoEvent.OnSaveTodoClick)
 
         }) {
             Icon(imageVector = Icons.Default.Check, contentDescription = "Save")
 
-
         }
-    }) {}
+    }) {
+
+        Column(modifier = Modifier.fillMaxWidth()) {
+
+            TextField(
+                value = viewModel.title,
+                onValueChange = {
+                    viewModel.onEvent(AddEditTodoEvent.OnTitleChange(it))
+                })
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        TextField(value = viewModel.description, onValueChange = {
+
+            viewModel.onEvent(AddEditTodoEvent.OnDescriptionChange(it))
+        })
+    }
 
 
 }
