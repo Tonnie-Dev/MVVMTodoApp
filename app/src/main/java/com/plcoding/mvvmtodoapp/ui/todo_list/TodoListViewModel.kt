@@ -71,7 +71,7 @@ class TodoListViewModel @Inject constructor(private val repository: TodoReposito
                 sendUIEvent(UIEvent.Navigate(Routes.ADD_EDIT_TODO + "/${event.todo.id}"))
             }
             is OnAddTodoClick -> {
-                sendUIEvent(UIEvent.Navigate(Routes.ADD_EDIT_TODO))
+                sendUIEvent(UIEvent.Navigate(Routes.ADD_EDIT_TODO + "/${Routes.DEFAULT_TODO_ID}") )
 
             }
         }
