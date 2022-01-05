@@ -12,6 +12,7 @@ import com.plcoding.mvvmtodoapp.ui.Screens
 import com.plcoding.mvvmtodoapp.ui.add_edit_todo.AddEditTodoScreen
 import com.plcoding.mvvmtodoapp.ui.theme.MVVMTodoAppTheme
 import com.plcoding.mvvmtodoapp.ui.todo_list.TodoListScreen
+import com.plcoding.mvvmtodoapp.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
                                 name = "todoId",
                                 builder = {
                                     type = NavType.IntType
-                                    defaultValue = -1
+                                    defaultValue = Routes.DEFAULT_TODO_ID
                                 })
                         )
                     ) {
